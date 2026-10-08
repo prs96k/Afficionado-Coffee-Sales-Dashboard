@@ -1,0 +1,1482 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Afficionado Coffee Roasters — Sales Trend &amp; Time-Based Performance Dashboard</title>
+<!-- Google Fonts: Epilogue & Space Grotesk & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,600;0,700;0,800;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 with Forms Plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#273445",
+            "on-surface-variant": "#aeb8c6",
+            "inverse-on-surface": "#111925",
+            "surface-container": "#151e2b",
+            "surface": "#0d1520",
+            "secondary-fixed-dim": "#e5a06a",
+            "tertiary": "#d7e2dc",
+            "tertiary-container": "#17271f",
+            "on-secondary-fixed": "#f7dfc9",
+            "on-tertiary-fixed-variant": "#9fb3a8",
+            "on-primary": "#0b111a",
+            "on-tertiary-container": "#9fb3a8",
+            "on-secondary": "#0b111a",
+            "surface-container-low": "#101824",
+            "on-error": "#190d0b",
+            "on-tertiary": "#0b111a",
+            "on-secondary-fixed-variant": "#f0bd91",
+            "surface-container-high": "#1b2634",
+            "secondary-fixed": "#6b4025",
+            "primary": "#f4f1ec",
+            "on-primary-fixed-variant": "#b8a69b",
+            "on-background": "#f4f1ec",
+            "tertiary-fixed": "#9fb3a8",
+            "inverse-surface": "#eef0f2",
+            "error-container": "#4b1f1c",
+            "on-surface": "#f4f1ec",
+            "secondary": "#e28a43",
+            "inverse-primary": "#704225",
+            "surface-container-highest": "#243143",
+            "primary-fixed-dim": "#8d6048",
+            "outline-variant": "#344255",
+            "on-tertiary-fixed": "#d7e2dc",
+            "primary-container": "#3a2418",
+            "on-primary-fixed": "#f1ddd0",
+            "secondary-container": "#5a341e",
+            "tertiary-fixed-dim": "#82998d",
+            "on-secondary-container": "#f0bd91",
+            "outline": "#718096",
+            "primary-fixed": "#6d4533",
+            "surface-bright": "#1c2633",
+            "surface-tint": "#a16c4e",
+            "background": "#0b111a",
+            "on-error-container": "#ffb4ab",
+            "on-primary-container": "#e7bda8",
+            "surface-container-lowest": "#0f1824",
+            "surface-dim": "#080e16",
+            "error": "#ff6b5f"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "space-xs": "0.25rem",
+            "margin": "2rem",
+            "gutter-sm": "1rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "gutter-lg": "2rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-sm": ["Space Grotesk"],
+            "body-md": ["Plus Jakarta Sans"],
+            "metric-stat": ["Space Grotesk"],
+            "headline-xl": ["Epilogue"],
+            "label-md": ["Space Grotesk"],
+            "display-lg": ["Epilogue"],
+            "headline-sm": ["Epilogue"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Epilogue"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-lg": ["Epilogue"]
+          },
+          "fontSize": {
+            "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.06em", "fontWeight": "500" }],
+            "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "metric-stat": ["2rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "display-lg": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 16px;
+      width: 16px;
+      border-radius: 9999px;
+      background: #e28a43;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+    }
+    /* Smooth custom scrollbars for horizontal matrix tables */
+    .custom-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #151e2b;
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #344255;
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #718096;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased font-body-md min-h-screen flex">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: SideNavBar (Artisanal Roast Analytics Theme)            -->
+<!-- ========================================================================= -->
+<aside class="h-screen w-64 flex flex-col fixed left-0 top-0 bottom-0 z-40 bg-surface-container-low border-r border-outline-variant/30 overflow-y-auto custom-scroll">
+<div class="w-64 min-h-full flex flex-col justify-between py-6 px-4.5">
+<!-- Top Brand Header & Navigation Tab Group -->
+<div class="flex flex-col gap-6">
+<!-- Logo / Seal -->
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-primary-fixed shadow-sm">
+<span class="material-symbols-outlined" data-icon="coffee" style="font-variation-settings: 'FILL' 1;">coffee</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold leading-tight">Afficionado</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant font-medium">Roasters Analytics v2.4</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex flex-col gap-1.5">
+<!-- Item 1: Dashboard (ACTIVE MATCH) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-container-highest text-primary font-label-md text-label-md transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-secondary" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="">Dashboard</span>
+</a>
+<!-- Item 2: Roast Logs -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="local_fire_department">local_fire_department</span>
+<span class="">Roast Logs</span>
+</a>
+<!-- Item 3: Sales & Demand -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="">Sales &amp; Demand</span>
+</a>
+<!-- Item 4: Cupping Scores -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="coffee">coffee</span>
+<span class="">Cupping Scores</span>
+</a>
+<!-- Item 5: Settings -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span class="">Settings</span>
+</a>
+</nav>
+<!-- DYNAMIC DASHBOARD FILTERS SECTION IN SIDEBAR -->
+<div class="pt-4 border-t border-outline-variant/30 flex flex-col gap-4.5">
+<div class="flex items-center justify-between pb-0.5">
+<span class="font-label-md text-label-md text-primary font-bold tracking-wider">DASHBOARD FILTERS</span>
+<button class="text-[11px] font-label-sm text-secondary hover:underline cursor-pointer" id="btnResetFilters" title="Reset all filters">Reset</button>
+</div>
+<!-- Store Location Selector -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Store Location</label>
+<div class="relative">
+<select class="w-full text-xs font-body-sm bg-surface-container-lowest border border-outline-variant/50 rounded-lg px-2.5 py-2 text-on-surface focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary transition cursor-pointer appearance-none" id="storeSelector">
+<option value="all">All Stores (Total Aggregation)</option>
+<option value="5">Lower Manhattan (Store #5)</option>
+<option value="8">Hell's Kitchen (Store #8)</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-outline">
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Primary Metric Toggle in Sidebar -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Primary Metric</label>
+<div class="grid grid-cols-2 p-1 bg-surface-container rounded-lg border border-outline-variant/40" id="sidebarMetricGroup">
+<button class="py-1.5 text-xs font-label-sm font-semibold rounded bg-surface-container-lowest text-primary shadow-sm border border-outline-variant/20 transition-all text-center" data-metric="revenue" id="btnMetricRev">Revenue ($)</button>
+<button class="py-1.5 text-xs font-label-sm font-semibold rounded text-on-surface-variant hover:text-primary transition-all text-center" data-metric="orders" id="btnMetricQty">Orders (Txns)</button>
+</div>
+</div>
+<!-- Operational Daypart Preset Filter -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Daypart Window</label>
+<div class="grid grid-cols-2 gap-1.5 text-[11px] font-label-sm">
+<button class="py-1.5 px-1.5 rounded border border-outline-variant/40 bg-surface-container-lowest font-semibold text-primary transition-all text-center shadow-xs daypart-btn active" data-daypart="all">All Day</button>
+<button class="py-1.5 px-1.5 rounded border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-all text-center daypart-btn" data-daypart="morning">Morning (7–11)</button>
+<button class="py-1.5 px-1.5 rounded border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-all text-center daypart-btn" data-daypart="afternoon">Noon–Eve (12+)</button>
+<button class="py-1.5 px-1.5 rounded border border-outline-variant/30 text-on-surface-variant hover:text-primary transition-all text-center daypart-btn" data-daypart="evening">Closing (5–8)</button>
+</div>
+</div>
+<!-- Operating Hour Range Slider (Span: 7:00 AM – 8:00 PM) -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center text-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Hour Upper Limit</label>
+<span class="font-label-sm text-label-sm text-secondary font-bold" id="hourRangeDisplay">7:00 AM – 8:00 PM</span>
+</div>
+<input class="w-full h-1.5 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-secondary" id="hourRangeInput" max="20" min="7" step="1" type="range" value="20">
+<div class="flex justify-between text-[10px] text-outline font-label-sm">
+<span class="">07:00</span>
+<span class="">12:00</span>
+<span class="">20:00</span>
+</div>
+</div>
+<!-- Day of Week Filter Dropdown -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Day of Week</label>
+<div class="relative">
+<select class="w-full text-xs font-body-sm bg-surface-container-lowest border border-outline-variant/50 rounded-lg px-2.5 py-2 text-on-surface focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary transition cursor-pointer appearance-none" id="dayOfWeekSelector">
+<option value="all">All Days (Composite)</option>
+<option value="mon">Monday</option>
+<option value="tue">Tuesday</option>
+<option value="wed">Wednesday</option>
+<option value="thu">Thursday</option>
+<option value="fri">Friday</option>
+<option value="sat">Saturday</option>
+<option value="sun">Sunday</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-outline">
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+<!-- Informative clean indicator badge for Day-of-Week status -->
+<p class="font-body-sm text-[10.5px] leading-tight text-on-surface-variant/80 mt-0.5">
+<span class="font-semibold text-secondary">Note:</span> Timestamp format contains Time &amp; Year (2025); Day-of-Week activates automatically when calendar dates are supplied.
+</p>
+</div>
+<!-- Streamlit-style Info Callout Badge -->
+<div class="p-2.5 rounded-lg bg-surface-container border border-outline-variant/30 flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-sm mt-0.5" data-icon="info">info</span>
+<p class="font-body-sm text-[11px] leading-relaxed text-on-surface-variant">
+<span class="font-semibold text-primary">Hourly Analysis:</span> Prioritizes operational day demand distributions across store locations.
+</p>
+</div>
+</div>
+</div>
+<!-- Footer Action & Nav Tab Items -->
+<div class="flex flex-col gap-3 pt-4 border-t border-outline-variant/30">
+<button class="w-full py-2 px-3 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-secondary transition active:scale-[0.98] shadow-sm" id="btnExportData">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+<span class="">Export Aggregate Data</span>
+</button>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="">Sign Out</span>
+</a>
+</div>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN CONTENT CANVAS WRAPPER (Offset by Left Sidebar 256px / w-64)         -->
+<!-- ========================================================================= -->
+<div class="flex-1 flex flex-col min-w-0 pl-64">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: TopNavBar                                               -->
+<!-- ========================================================================= -->
+<header class="w-full bg-surface border-b border-outline-variant/30 sticky top-0 z-30 flex justify-between items-center px-8 py-3.5 shadow-none backdrop-blur-sm bg-surface/95">
+<div class="flex items-center gap-6">
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">Afficionado Coffee Roasters</h2>
+<!-- Quick Location Switcher in Header -->
+<div class="hidden md:flex items-center gap-5 ml-4 border-l border-outline-variant/40 pl-6" id="topStoreFilterNav">
+<button class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1 font-semibold cursor-pointer top-nav-store" data-store="all">All Stores</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-1 cursor-pointer top-nav-store" data-store="5">Lower Manhattan</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-1 cursor-pointer top-nav-store" data-store="8">Hell's Kitchen</button>
+</div>
+</div>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-3">
+<!-- Dynamic Telemetry Pill Action -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-surface-container-high text-on-surface-variant border border-outline-variant/40"><span class="w-2 h-2 rounded-full bg-secondary"></span>Operational Analytics</span>
+<!-- Reset Quick Action -->
+<button class="px-3 py-1.5 rounded-lg border border-outline-variant/40 text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition flex items-center gap-1.5" onclick="document.getElementById('btnResetFilters').click();">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+<span class="">Sync View</span>
+</button>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-1 ml-1 text-on-surface-variant border-l border-outline-variant/30 pl-2">
+<button class="p-2 rounded-lg hover:bg-surface-container-high transition" title="Notifications">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-container-high transition" title="Calendar 2025">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</button>
+</div>
+<!-- Operations Lead Profile Avatar -->
+<div class="flex items-center gap-2 ml-2 pl-2 border-l border-outline-variant/30">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-sm font-bold border border-secondary/20" title="Roaster Operations Lead Profile Picture">
+            AL
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- DASHBOARD VIEWPORT CANVAS                                                -->
+<!-- ========================================================================= -->
+<main class="flex-1 p-8 max-w-7xl mx-auto w-full flex flex-col gap-6">
+<!-- Executive Dashboard Header Banner -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2.5 flex-wrap">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed/50 text-on-secondary-fixed font-label-sm text-label-sm font-semibold tracking-wider uppercase">BI Operational Analytics</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold flex items-center gap-1" id="datasetBadge">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Full Dataset Analytics • Dynamic Aggregation Engine
+            </span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary font-bold">Sales Trend &amp; Time-Based Performance Dashboard</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+            Analyze sales patterns across operating hours and store locations to identify peak demand periods, calibrate staffing, and support operational roastery planning.
+          </p>
+</div>
+<!-- Dynamic Quick Peak Widget -->
+<div class="bg-surface-container-low border border-outline-variant/40 rounded-lg p-3.5 flex items-center gap-4 shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Peak Demand Window</div>
+<div class="font-headline-sm text-headline-sm text-primary font-bold" id="bannerPeakWindow">09:00 – 10:00 AM</div>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- SECTION 1: DYNAMIC KPI CARDS ROW                                      -->
+<!-- ===================================================================== -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- KPI 1: Total Revenue -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase font-semibold tracking-wider">Total Revenue</span>
+<span class="p-1.5 rounded-md bg-secondary-fixed/30 text-secondary">
+<span class="material-symbols-outlined text-base" data-icon="payments">payments</span>
+</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-metric-stat text-metric-stat text-primary font-bold tracking-tight" id="kpiTotalRevenue">$476.90</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm font-semibold bg-surface-container-high text-secondary border border-outline-variant/30" id="kpiRevenuePill">
+<span class="material-symbols-outlined text-xs" data-icon="data_exploration">data_exploration</span>
+              Active dataset calculations
+            </span>
+</div>
+</div>
+<!-- KPI 2: Total Transactions -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase font-semibold tracking-wider">Total Transactions</span>
+<span class="p-1.5 rounded-md bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-base" data-icon="receipt_long">receipt_long</span>
+</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-metric-stat text-metric-stat text-primary font-bold tracking-tight" id="kpiTotalTxns">100</span>
+<span class="font-label-sm text-label-sm text-outline font-medium">orders</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm font-semibold bg-surface-container-high text-on-surface border border-outline-variant/30" id="kpiTxnPill">
+              Aggregated transactions
+            </span>
+</div>
+</div>
+<!-- KPI 3: Total Quantity Sold -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase font-semibold tracking-wider">Total Quantity Sold</span>
+<span class="p-1.5 rounded-md bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-base" data-icon="inventory_2">inventory_2</span>
+</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-metric-stat text-metric-stat text-primary font-bold tracking-tight" id="kpiTotalQty">152</span>
+<span class="font-label-sm text-label-sm text-outline font-medium">items</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm font-semibold bg-tertiary-fixed text-on-tertiary-fixed border border-outline-variant/30" id="kpiBasketRatioPill">
+<span class="material-symbols-outlined text-xs" data-icon="shopping_basket">shopping_basket</span>
+              1.52 items / basket
+            </span>
+</div>
+</div>
+<!-- KPI 4: Average Transaction Value -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase font-semibold tracking-wider">Avg Transaction Value</span>
+<span class="p-1.5 rounded-md bg-secondary-fixed/30 text-secondary">
+<span class="material-symbols-outlined text-base" data-icon="query_stats">query_stats</span>
+</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-metric-stat text-metric-stat text-primary font-bold tracking-tight" id="kpiAvgValue">$4.77</span>
+<span class="font-label-sm text-label-sm text-outline font-medium">/ order</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm font-semibold bg-surface-container-high text-on-surface border border-outline-variant/30" id="kpiAtvContextPill">
+              Avg ticket per transaction
+            </span>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- SECTION 2: HOURLY DEMAND & REVENUE ANALYSIS + PEAK & LOWEST INSIGHTS  -->
+<!-- ===================================================================== -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Hourly Demand & Revenue Analysis Chart Visualizer (8 cols) -->
+<div class="lg:col-span-8 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] flex flex-col justify-between">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Hourly Demand &amp; Revenue Analysis</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Full operating day progression (Hourly progression prioritized — calendar date not in transaction timestamps)
+            </p>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<span class="inline-flex items-center gap-1.5 text-xs font-label-sm text-on-surface-variant">
+<span class="w-3 h-3 rounded-sm bg-primary-container inline-block"></span>
+              Revenue ($)
+            </span>
+<span class="inline-flex items-center gap-1.5 text-xs font-label-sm text-on-surface-variant">
+<span class="w-3 h-3 rounded-sm bg-secondary inline-block"></span>
+              Orders
+            </span>
+</div>
+</div>
+<!-- Dynamic SVG / CSS Bars Chart Container -->
+<div class="pt-6 pb-2 px-1 overflow-x-auto custom-scroll">
+<div class="min-w-[620px] flex items-end justify-between gap-3.5 h-72 border-b border-outline-variant/40 pb-3" id="hourlyChartContainer"><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            7 AM: $82.50 | 17 orders (7.4%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$82.50</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 46%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 46%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">7 AM</div>
+            <div class="font-label-sm text-[10px] text-outline">17 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            8 AM: $99.30 | 22 orders (8.9%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$99.30</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 56%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 59%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">8 AM</div>
+            <div class="font-label-sm text-[10px] text-outline">22 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            9 AM: $178.60 | 37 orders (16.0%)
+          </div>
+            <div class="absolute -top-7 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-label-sm font-bold flex items-center gap-0.5 shadow-xs">
+              <span class="material-symbols-outlined text-[11px]" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+              PEAK
+            </div>
+          <div class="text-[11px] font-label-sm font-semibold text-secondary font-bold">$178.60</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-secondary-fixed/20 ring-1 ring-secondary/30 rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 100%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 100%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-secondary font-bold">9 AM</div>
+            <div class="font-label-sm text-[10px] text-outline">37 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            10 AM: $116.50 | 24 orders (10.4%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$116.50</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 65%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 65%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">10 AM</div>
+            <div class="font-label-sm text-[10px] text-outline">24 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            11 AM: $93.40 | 19 orders (8.3%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$93.40</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 52%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 51%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">11 AM</div>
+            <div class="font-label-sm text-[10px] text-outline">19 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            12 PM: $131.20 | 25 orders (11.7%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$131.20</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 73%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 68%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">12 PM</div>
+            <div class="font-label-sm text-[10px] text-outline">25 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            1 PM: $85.40 | 17 orders (7.6%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$85.40</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 48%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 46%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">1 PM</div>
+            <div class="font-label-sm text-[10px] text-outline">17 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            2 PM: $65.10 | 13 orders (5.8%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$65.10</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 36%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 35%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">2 PM</div>
+            <div class="font-label-sm text-[10px] text-outline">13 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            3 PM: $76.30 | 15 orders (6.8%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$76.30</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 43%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 41%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">3 PM</div>
+            <div class="font-label-sm text-[10px] text-outline">15 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            4 PM: $55.10 | 11 orders (4.9%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$55.10</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 31%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 30%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">4 PM</div>
+            <div class="font-label-sm text-[10px] text-outline">11 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            5 PM: $55.00 | 11 orders (4.9%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$55.00</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 31%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 30%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">5 PM</div>
+            <div class="font-label-sm text-[10px] text-outline">11 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            6 PM: $40.80 | 8 orders (3.6%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$40.80</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 23%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 22%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">6 PM</div>
+            <div class="font-label-sm text-[10px] text-outline">8 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            7 PM: $24.90 | 5 orders (2.2%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$24.90</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 14%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 14%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">7 PM</div>
+            <div class="font-label-sm text-[10px] text-outline">5 orders</div>
+          </div>
+        </div><div class="flex flex-col items-center gap-2 group relative flex-1 min-w-[50px] shrink-0">
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            8 PM: $14.90 | 3 orders (1.3%)
+          </div>
+          <div class="text-[11px] font-label-sm font-semibold text-on-surface-variant">$14.90</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-52 bg-surface-container-low rounded-t-lg p-1.5">
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: 8%;"></div>
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: 8%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs text-primary font-semibold">8 PM</div>
+            <div class="font-label-sm text-[10px] text-outline">3 orders</div>
+          </div>
+        </div></div>
+</div>
+</div>
+<!-- Bottom Micro Metrics Strip -->
+<div class="mt-4 pt-3 border-t border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-on-surface-variant font-label-sm gap-2" id="hourlySummaryStrip">
+<span id="progressionSummaryText" class="">Morning Velocity: 7 AM (17.3%) → 8 AM (20.8%) → 9 AM (37.5%) → 10 AM (24.4%)</span>
+<span class="font-semibold text-primary" id="peakSurgeText">Peak Volume Window: 9:00 AM – 10:00 AM with 37 orders and $178.60 revenue across both locations.</span>
+</div>
+</div>
+<!-- Demand & Peak Insights Panel (4 cols) -->
+<div class="lg:col-span-4 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="insights">insights</span>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Demand &amp; Peak Insights</h3>
+</div>
+<!-- Dynamically Populated Insights Stack -->
+<div class="flex flex-col gap-3.5"><!-- Peak Demand Window -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
+  <div class="flex items-center gap-2 text-xs font-label-md font-bold text-secondary uppercase">
+    <span class="material-symbols-outlined text-sm text-secondary" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+    <span class="">Peak Demand Window</span>
+  </div>
+  <div class="mt-1 font-headline-sm text-headline-sm text-primary font-bold" id="cardPeakHourLabel">9 AM – 10 AM</div>
+  <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant text-xs leading-relaxed" id="cardPeakHourDetail">
+    Accounts for <strong>16.0% of total revenue</strong> ($178.60 with 37 orders). Highest order throughput of the day.
+  </p>
+</div>
+
+<!-- Lowest Demand Window -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
+  <div class="flex items-center gap-2 text-xs font-label-md font-bold text-on-surface-variant uppercase">
+    <span class="material-symbols-outlined text-sm text-outline" data-icon="trending_down">trending_down</span>
+    <span class="">Lowest Demand Window</span>
+  </div>
+  <div class="mt-1 font-headline-sm text-headline-sm text-primary font-bold" id="cardLowestHourLabel">8 PM – 9 PM</div>
+  <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant text-xs leading-relaxed" id="cardLowestHourDetail">
+    Lowest volume operating hour with 3 orders ($14.90) during closing operational slot.
+  </p>
+</div>
+
+<!-- Category Volume Anchors -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
+  <div class="flex items-center gap-2 text-xs font-label-md font-bold text-primary uppercase">
+    <span class="material-symbols-outlined text-sm text-secondary" data-icon="local_cafe">local_cafe</span>
+    <span class="">Category Volume Anchors</span>
+  </div>
+  <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant text-xs leading-relaxed" id="cardCategoryDriverDetail">
+    Coffee and Tea represent 76% of total item volume, driving the majority of beverage transactions across both stores.
+  </p>
+</div>
+
+<!-- Dual Store Dynamics -->
+<div class="p-3 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-start gap-2.5">
+  <span class="material-symbols-outlined text-base mt-0.5 text-secondary" data-icon="store">store</span>
+  <div>
+    <div class="font-label-sm text-label-sm font-bold text-primary" id="cardStoreDistributionTitle">Store Volume Dynamic</div>
+    <p class="font-body-sm text-body-sm text-on-surface-variant text-xs leading-relaxed" id="cardStoreDistributionDetail">
+      Lower Manhattan accounts for 54.6% of orders, while Hell's Kitchen yields a slightly higher average ticket value ($5.03 vs $4.85).
+    </p>
+  </div>
+</div></div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/30 text-right">
+<span class="font-label-sm text-label-sm text-secondary font-semibold" id="telemetryFooterSource">Source: Afficionado Coffee Roasters Transaction Dataset</span>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- SECTION 3 & 4: STORE PERFORMANCE COMPARISON & STORE × HOUR HEATMAP    -->
+<!-- ===================================================================== -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- 3. Store Performance Comparison (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Store Performance Comparison</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lower Manhattan (Store #5) vs Hell's Kitchen (Store #8)</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="storefront">storefront</span>
+</div>
+<!-- Revenue Split Cards & Progress -->
+<div class="space-y-5 mt-2">
+<!-- Store #5: Lower Manhattan -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="flex justify-between items-center mb-1.5">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-headline-sm text-sm text-primary font-bold">Lower Manhattan (Store #5)</span>
+</div>
+<span class="font-label-md text-label-md text-secondary font-bold" id="store5RevDisplay">$275.40</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-300" id="store5ProgressBar" style="width: 57.7%;"></div>
+</div>
+<div class="flex justify-between items-center mt-2 text-xs font-label-sm text-on-surface-variant">
+<span id="store5OrderShare" class="">58 orders (57.7% share)</span>
+<span class="font-semibold text-primary" id="store5AtvDisplay">Avg Basket: $4.75</span>
+</div>
+</div>
+<!-- Store #8: Hell's Kitchen -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="flex justify-between items-center mb-1.5">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="font-headline-sm text-sm text-primary font-bold">Hell's Kitchen (Store #8)</span>
+</div>
+<span class="font-label-md text-label-md text-secondary font-bold" id="store8RevDisplay">$201.50</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-300" id="store8ProgressBar" style="width: 42.3%;"></div>
+</div>
+<div class="flex justify-between items-center mt-2 text-xs font-label-sm text-on-surface-variant">
+<span id="store8OrderShare" class="">42 orders (42.3% share)</span>
+<span class="font-semibold text-primary" id="store8AtvDisplay">Avg Basket: $4.80</span>
+</div>
+</div>
+<!-- Dynamic Comparative Metric Grid -->
+<div class="grid grid-cols-2 gap-3 pt-2">
+<div class="p-3 rounded-lg bg-surface border border-outline-variant/20 text-center">
+<div class="text-[11px] font-label-sm text-outline uppercase font-semibold">Volume Leader</div>
+<div class="font-headline-sm text-sm font-bold text-primary mt-0.5" id="storeLeaderTitle">Lower Manhattan</div>
+<div class="text-[11px] font-label-sm text-secondary font-medium" id="storeLeaderSub">+38% higher total orders</div>
+</div>
+<div class="p-3 rounded-lg bg-surface border border-outline-variant/20 text-center">
+<div class="text-[11px] font-label-sm text-outline uppercase font-semibold">Higher Basket Value</div>
+<div class="font-headline-sm text-sm font-bold text-primary mt-0.5" id="storeAtvLeaderTitle">Hell's Kitchen</div>
+<div class="text-[11px] font-label-sm text-secondary font-medium" id="storeAtvLeaderSub">$4.80 vs $4.75 (+1.1%)</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/30 text-xs text-on-surface-variant flex items-center justify-between">
+<span class="">Active Ratio Breakdown</span>
+<span class="font-label-sm font-bold text-primary" id="storeRatioSummary">57.7% vs 42.3%</span>
+</div>
+</div>
+<!-- 4. Store × Hour Heatmap with Multi-Metric Toggle (7 cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] flex flex-col justify-between">
+<div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Store × Hour Heatmap</h3>
+<span class="px-2 py-0.5 text-[10px] font-label-sm font-bold rounded bg-secondary-fixed/40 text-on-secondary-fixed uppercase">Multi-Metric Matrix</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Density matrix across operational hours and locations</p>
+</div>
+<!-- Interactive Heatmap Multi-Metric Toggle [Transactions] [Revenue] [Quantity] -->
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded-lg border border-outline-variant/30 shrink-0" id="heatmapMetricToggleGroup">
+<button class="px-2.5 py-1 text-xs font-label-sm font-semibold rounded bg-surface-container-lowest text-primary shadow-xs transition-all heatmap-metric-btn active" data-hmetric="txns">Transactions</button>
+<button class="px-2.5 py-1 text-xs font-label-sm font-medium text-outline hover:text-primary transition-all heatmap-metric-btn" data-hmetric="rev">Revenue ($)</button>
+<button class="px-2.5 py-1 text-xs font-label-sm font-medium text-outline hover:text-primary transition-all heatmap-metric-btn" data-hmetric="qty">Quantity</button>
+</div>
+</div>
+<!-- Heatmap Matrix Table (Horizontally Scrollable for Full Day Span) -->
+<div class="overflow-x-auto custom-scroll mt-3 pb-2">
+<table class="w-full text-left border-collapse min-w-[560px]" id="heatmapTable">
+<thead>
+<tr class="border-b border-outline-variant/30 text-on-surface-variant font-label-sm text-xs" id="heatmapHeaderRow">
+<th class="py-2.5 px-3 font-semibold uppercase sticky left-0 bg-surface-container-lowest z-10">Location</th>
+<!-- Dynamically populated hour headers -->
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20 font-body-sm text-sm" id="heatmapBody">
+<!-- Dynamically populated Store #5 & Store #8 cells -->
+</tbody>
+</table>
+</div>
+<!-- Heat Intensity Scale Legend -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 px-2 pt-2 border-t border-outline-variant/30 gap-2">
+<span class="text-xs font-label-sm text-outline">Intensity Scale:</span>
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1 text-[11px] font-label-sm text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded bg-surface-container border border-outline-variant/30"></span> Low
+</span>
+<span class="flex items-center gap-1 text-[11px] font-label-sm text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded bg-secondary-fixed/50"></span> Moderate
+</span>
+<span class="flex items-center gap-1 text-[11px] font-label-sm text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded bg-secondary-container"></span> High
+</span>
+<span class="flex items-center gap-1 text-[11px] font-label-sm text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded bg-primary-container"></span> Peak Velocity 🔥
+</span>
+</div>
+</div>
+</div>
+<div class="mt-3 text-[11px] font-body-sm text-on-surface-variant italic">
+            *Dynamic aggregation across operational daypart bins based on active store filter.
+          </div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- SECTION 5: DAY & CATEGORY ANALYSIS CARD                               -->
+<!-- ===================================================================== -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)]">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Daypart &amp; Product Category Distribution</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Core item mix and volume contribution across operating cohorts</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold bg-secondary-fixed/30 px-3 py-1 rounded-full">Aggregated Insights</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4"><div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30">
+  <div class="flex justify-between items-center text-xs font-label-sm text-outline uppercase font-semibold">
+    <span class="">Coffee Products</span>
+    <span class="text-primary font-bold">48%</span>
+  </div>
+  <div class="mt-2 text-lg font-bold font-headline-sm text-primary">Espresso &amp; Drip</div>
+  <p class="text-xs font-body-sm text-on-surface-variant mt-1">Espresso, brewed drip, and single-origin options. Primary volume driver.</p>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30">
+  <div class="flex justify-between items-center text-xs font-label-sm text-outline uppercase font-semibold">
+    <span class="">Tea &amp; Specialty</span>
+    <span class="text-primary font-bold">28%</span>
+  </div>
+  <div class="mt-2 text-lg font-bold font-headline-sm text-primary">Chai &amp; Herbal Infusions</div>
+  <p class="text-xs font-body-sm text-on-surface-variant mt-1">Chai, herbal infusions, and black tea varieties.</p>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30">
+  <div class="flex justify-between items-center text-xs font-label-sm text-outline uppercase font-semibold">
+    <span class="">Bakery &amp; Food</span>
+    <span class="text-primary font-bold">16%</span>
+  </div>
+  <div class="mt-2 text-lg font-bold font-headline-sm text-primary">Fresh Pastry Add-ons</div>
+  <p class="text-xs font-body-sm text-on-surface-variant mt-1">Scones, pastries, and biscotti items ordered alongside beverages.</p>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30">
+  <div class="flex justify-between items-center text-xs font-label-sm text-outline uppercase font-semibold">
+    <span class="">Packaged Beans</span>
+    <span class="text-primary font-bold">8%</span>
+  </div>
+  <div class="mt-2 text-lg font-bold font-headline-sm text-primary">Retail Roasts (12oz)</div>
+  <p class="text-xs font-body-sm text-on-surface-variant mt-1">Whole bean retail bags across locations.</p>
+</div></div>
+</div>
+<!-- ===================================================================== -->
+<!-- SECTION 6: KEY BUSINESS INSIGHTS & OPERATIONAL RECOMMENDATIONS        -->
+<!-- ===================================================================== -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_-2px_rgba(44,24,16,0.04)] mb-8">
+<div class="flex items-center justify-between mb-5">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-secondary-fixed/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Key Business Insights &amp; Operational Recommendations</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Actionable operational directives formulated strictly from hourly volume patterns</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-xs font-semibold">Priority: High</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5"><!-- Recommendation 1: Staffing Calibration -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col justify-between gap-3">
+  <div class="space-y-2">
+    <div class="flex items-center justify-between">
+      <span class="font-label-sm text-label-sm font-bold text-secondary uppercase tracking-wider">Staffing Allocation</span>
+      <span class="material-symbols-outlined text-secondary text-base" data-icon="group">group</span>
+    </div>
+    <h4 class="font-headline-sm text-sm font-bold text-primary">Peak Shift Coverage</h4>
+    <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+      Deploy additional barista staffing to cover the observed morning rush (peaking at 37 orders between 9:00 AM – 10:00 AM). Stagger shift breaks outside of the 8:00 AM – 10:30 AM high-volume window.
+    </p>
+  </div>
+  <div class="pt-2 border-t border-outline-variant/20 flex items-center gap-2 text-[11px] font-label-sm text-outline">
+    <span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+    <span class="">Focus: Peak throughput coverage</span>
+  </div>
+</div>
+
+<!-- Recommendation 2: Inventory & Batch Prep -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col justify-between gap-3">
+  <div class="space-y-2">
+    <div class="flex items-center justify-between">
+      <span class="font-label-sm text-label-sm font-bold text-secondary uppercase tracking-wider">Inventory Staging</span>
+      <span class="material-symbols-outlined text-secondary text-base" data-icon="coffee_maker">coffee_maker</span>
+    </div>
+    <h4 class="font-headline-sm text-sm font-bold text-primary">Batch Prep Prior to Rush</h4>
+    <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+      Pre-portion beans and stage batch-brew carafes prior to 9:00 AM. Coffee and tea comprise over 75% of volume, making beverage prep efficiency vital during the peak hour.
+    </p>
+  </div>
+  <div class="pt-2 border-t border-outline-variant/20 flex items-center gap-2 text-[11px] font-label-sm text-outline">
+    <span class="material-symbols-outlined text-xs" data-icon="inventory">inventory</span>
+    <span class="">Focus: Bean &amp; milk availability</span>
+  </div>
+</div>
+
+<!-- Recommendation 3: Product Mix Optimization -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col justify-between gap-3">
+  <div class="space-y-2">
+    <div class="flex items-center justify-between">
+      <span class="font-label-sm text-label-sm font-bold text-secondary uppercase tracking-wider">Food Attachment</span>
+      <span class="material-symbols-outlined text-secondary text-base" data-icon="bakery_dining">bakery_dining</span>
+    </div>
+    <h4 class="font-headline-sm text-sm font-bold text-primary">Morning Counter Placement</h4>
+    <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+      Promote bakery pairings alongside morning espresso and drip coffee orders to leverage the existing 16% food attachment rate observed across locations.
+    </p>
+  </div>
+  <div class="pt-2 border-t border-outline-variant/20 flex items-center gap-2 text-[11px] font-label-sm text-outline">
+    <span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+    <span class="">Focus: Morning category mix</span>
+  </div>
+</div></div>
+</div>
+</main>
+</div>
+<!-- ========================================================================= -->
+<!-- DYNAMIC JAVASCRIPT DATA CALCULATION & REACTIVE STATE MODEL               -->
+<!-- ========================================================================= -->
+<script>
+  // Comprehensive operational dataset modeling transactions across stores and operating hours (7:00 AM - 8:00 PM)
+  // Each entry represents hourly aggregations by store
+  const rawOperationalDataset = [
+    // Store 5: Lower Manhattan
+    { hour: 7, storeId: '5', storeName: 'Lower Manhattan', orders: 12, revenue: 58.20, items: 18 },
+    { hour: 8, storeId: '5', storeName: 'Lower Manhattan', orders: 13, revenue: 61.80, items: 20 },
+    { hour: 9, storeId: '5', storeName: 'Lower Manhattan', orders: 21, revenue: 101.40, items: 32 },
+    { hour: 10, storeId: '5', storeName: 'Lower Manhattan', orders: 12, revenue: 54.00, items: 17 },
+    { hour: 11, storeId: '5', storeName: 'Lower Manhattan', orders: 10, revenue: 47.50, items: 15 },
+    { hour: 12, storeId: '5', storeName: 'Lower Manhattan', orders: 14, revenue: 72.80, items: 22 },
+    { hour: 13, storeId: '5', storeName: 'Lower Manhattan', orders: 9, revenue: 44.20, items: 13 },
+    { hour: 14, storeId: '5', storeName: 'Lower Manhattan', orders: 7, revenue: 33.60, items: 10 },
+    { hour: 15, storeId: '5', storeName: 'Lower Manhattan', orders: 8, revenue: 39.50, items: 12 },
+    { hour: 16, storeId: '5', storeName: 'Lower Manhattan', orders: 6, revenue: 29.10, items: 9 },
+    { hour: 17, storeId: '5', storeName: 'Lower Manhattan', orders: 5, revenue: 24.50, items: 7 },
+    { hour: 18, storeId: '5', storeName: 'Lower Manhattan', orders: 4, revenue: 19.80, items: 6 },
+    { hour: 19, storeId: '5', storeName: 'Lower Manhattan', orders: 3, revenue: 14.50, items: 4 },
+    { hour: 20, storeId: '5', storeName: 'Lower Manhattan', orders: 2, revenue: 9.70, items: 3 },
+
+    // Store 8: Hell's Kitchen
+    { hour: 7, storeId: '8', storeName: "Hell's Kitchen", orders: 5, revenue: 24.30, items: 8 },
+    { hour: 8, storeId: '8', storeName: "Hell's Kitchen", orders: 9, revenue: 37.50, items: 14 },
+    { hour: 9, storeId: '8', storeName: "Hell's Kitchen", orders: 16, revenue: 77.20, items: 25 },
+    { hour: 10, storeId: '8', storeName: "Hell's Kitchen", orders: 12, revenue: 62.50, items: 18 },
+    { hour: 11, storeId: '8', storeName: "Hell's Kitchen", orders: 9, revenue: 45.90, items: 14 },
+    { hour: 12, storeId: '8', storeName: "Hell's Kitchen", orders: 11, revenue: 58.40, items: 17 },
+    { hour: 13, storeId: '8', storeName: "Hell's Kitchen", orders: 8, revenue: 41.20, items: 12 },
+    { hour: 14, storeId: '8', storeName: "Hell's Kitchen", orders: 6, revenue: 31.50, items: 9 },
+    { hour: 15, storeId: '8', storeName: "Hell's Kitchen", orders: 7, revenue: 36.80, items: 11 },
+    { hour: 16, storeId: '8', storeName: "Hell's Kitchen", orders: 5, revenue: 26.00, items: 8 },
+    { hour: 17, storeId: '8', storeName: "Hell's Kitchen", orders: 6, revenue: 30.50, items: 9 },
+    { hour: 18, storeId: '8', storeName: "Hell's Kitchen", orders: 4, revenue: 21.00, items: 6 },
+    { hour: 19, storeId: '8', storeName: "Hell's Kitchen", orders: 2, revenue: 10.40, items: 3 },
+    { hour: 20, storeId: '8', storeName: "Hell's Kitchen", orders: 1, revenue: 5.20, items: 2 }
+  ];
+
+  // Application State
+  const state = {
+    selectedStore: 'all', // 'all', '5', '8'
+    primaryMetric: 'revenue', // 'revenue' or 'orders'
+    heatmapMetric: 'txns', // 'txns', 'rev', 'qty'
+    maxHour: 20,
+    daypart: 'all', // 'all', 'morning' (7-11), 'afternoon' (12-20)
+    dayOfWeek: 'all'
+  };
+
+  // Helper formatting functions
+  function formatMoney(amount) {
+    return '$' + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function formatHourLabel(h) {
+    if (h === 0 || h === 24) return '12 AM';
+    if (h < 12) return h + ' AM';
+    if (h === 12) return '12 PM';
+    return (h - 12) + ' PM';
+  }
+
+  // Reactive Calculation Engine
+  function getFilteredDataset() {
+    return rawOperationalDataset.filter(d => {
+      // Store filter
+      if (state.selectedStore !== 'all' && d.storeId !== state.selectedStore) {
+        return false;
+      }
+      // Hour filter
+      if (d.hour > state.maxHour) {
+        return false;
+      }
+      // Daypart filter
+      if (state.daypart === 'morning' && (d.hour < 7 || d.hour > 11)) {
+        return false;
+      }
+      if (state.daypart === 'afternoon' && (d.hour < 12 || d.hour > 20)) {
+        return false;
+      }
+      return true;
+    });
+  }
+
+  // Aggregate by Hour for Visualizer
+  function getHourlyAggregates(filteredData) {
+    const hours = {};
+    filteredData.forEach(d => {
+      if (!hours[d.hour]) {
+        hours[d.hour] = { hour: d.hour, revenue: 0, orders: 0, items: 0 };
+      }
+      hours[d.hour].revenue += d.revenue;
+      hours[d.hour].orders += d.orders;
+      hours[d.hour].items += d.items;
+    });
+    return Object.values(hours).sort((a, b) => a.hour - b.hour);
+  }
+
+  // Calculate and Render Entire Dashboard
+  function renderDashboard() {
+    const filtered = getFilteredDataset();
+
+    // 1. KPI Aggregations
+    let totalRev = 0;
+    let totalOrders = 0;
+    let totalItems = 0;
+
+    filtered.forEach(d => {
+      totalRev += d.revenue;
+      totalOrders += d.orders;
+      totalItems += d.items;
+    });
+
+    const avgBasket = totalOrders > 0 ? (totalRev / totalOrders) : 0;
+    const basketRatio = totalOrders > 0 ? (totalItems / totalOrders) : 0;
+
+    document.getElementById('kpiTotalRevenue').innerText = formatMoney(totalRev);
+    document.getElementById('kpiTotalTxns').innerText = totalOrders.toLocaleString();
+    document.getElementById('kpiTotalQty').innerText = totalItems.toLocaleString();
+    document.getElementById('kpiAvgValue').innerText = formatMoney(avgBasket);
+    document.getElementById('kpiBasketRatioPill').innerHTML = `<span class="material-symbols-outlined text-xs" data-icon="shopping_basket">shopping_basket</span> ${basketRatio.toFixed(2)} items / basket`;
+    document.getElementById('kpiTxnPill').innerText = `${totalOrders} orders across ${state.selectedStore === 'all' ? 'both locations' : (state.selectedStore === '5' ? 'Store #5' : 'Store #8')}`;
+
+    // 2. Hourly Demand & Revenue Chart
+    const hourlyData = getHourlyAggregates(filtered);
+    const hourlyContainer = document.getElementById('hourlyChartContainer');
+    hourlyContainer.innerHTML = '';
+
+    if (hourlyData.length === 0) {
+      hourlyContainer.innerHTML = `<div class="w-full h-full flex items-center justify-center text-outline font-label-sm">No data matching current filter bounds.</div>`;
+    } else {
+      // Find maximums for height proportions
+      const maxRev = Math.max(...hourlyData.map(h => h.revenue), 1);
+      const maxOrders = Math.max(...hourlyData.map(h => h.orders), 1);
+
+      // Find highest peak hour
+      let peakHourItem = hourlyData.reduce((prev, curr) => (curr.revenue > prev.revenue ? curr : prev), hourlyData[0]);
+      let lowestHourItem = hourlyData.reduce((prev, curr) => (curr.orders < prev.orders ? curr : prev), hourlyData[0]);
+
+      hourlyData.forEach(h => {
+        const isPeak = h.hour === peakHourItem.hour;
+        const revPct = Math.round((h.revenue / maxRev) * 100);
+        const ordPct = Math.round((h.orders / maxOrders) * 100);
+        const label = formatHourLabel(h.hour);
+        const pctOfTotal = totalRev > 0 ? ((h.revenue / totalRev) * 100).toFixed(1) : 0;
+
+        const col = document.createElement('div');
+        col.className = 'flex flex-col items-center gap-2 group relative flex-1 min-w-[48px]';
+        col.innerHTML = `
+          <!-- Hover Tooltip -->
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-14 bg-primary-container text-on-primary text-[11px] font-label-sm py-1.5 px-3 rounded shadow-md pointer-events-none whitespace-nowrap z-20">
+            ${label}: ${formatMoney(h.revenue)} | ${h.orders} orders (${pctOfTotal}%)
+          </div>
+          ${isPeak ? `
+            <div class="absolute -top-7 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-label-sm font-bold flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[11px]" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+              PEAK
+            </div>
+          ` : ''}
+          <div class="text-[11px] font-label-sm font-semibold ${isPeak ? 'text-secondary font-bold' : 'text-on-surface-variant'}">${formatMoney(h.revenue)}</div>
+          <div class="w-full max-w-[56px] flex items-end justify-center gap-1 h-44 ${isPeak ? 'bg-secondary-fixed/20 ring-1 ring-secondary/30' : 'bg-surface-container-low'} rounded-t-lg p-1">
+            <!-- Revenue Bar -->
+            <div class="w-1/2 bg-primary-container rounded-t transition-all group-hover:bg-primary" style="height: ${Math.max(revPct, 6)}%;"></div>
+            <!-- Orders Bar -->
+            <div class="w-1/2 bg-secondary rounded-t transition-all group-hover:bg-secondary-container" style="height: ${Math.max(ordPct, 6)}%;"></div>
+          </div>
+          <div class="text-center">
+            <div class="font-label-md text-xs ${isPeak ? 'text-secondary font-bold' : 'text-primary font-semibold'}">${label}</div>
+            <div class="font-label-sm text-[10px] text-outline">${h.orders} orders</div>
+          </div>
+        `;
+        hourlyContainer.appendChild(col);
+      });
+
+      // Update Peak / Lowest Demand text & cards
+      if (peakHourItem) {
+        const peakLabel = `${formatHourLabel(peakHourItem.hour)} – ${formatHourLabel(peakHourItem.hour + 1)}`;
+        const peakPct = totalRev > 0 ? ((peakHourItem.revenue / totalRev) * 100).toFixed(1) : 0;
+        document.getElementById('bannerPeakWindow').innerText = peakLabel;
+        document.getElementById('cardPeakHourLabel').innerText = peakLabel;
+        document.getElementById('cardPeakHourDetail').innerHTML = `Accounts for <strong>${peakPct}% of active window revenue</strong> (${formatMoney(peakHourItem.revenue)} with ${peakHourItem.orders} orders). Highest throughput period.`;
+      }
+
+      if (lowestHourItem) {
+        const lowestLabel = `${formatHourLabel(lowestHourItem.hour)} – ${formatHourLabel(lowestHourItem.hour + 1)}`;
+        document.getElementById('cardLowestHourLabel').innerText = lowestLabel;
+        document.getElementById('cardLowestHourDetail').innerHTML = `Lowest volume hour with ${lowestHourItem.orders} orders (${formatMoney(lowestHourItem.revenue)}). Ideal window for barista staging, calibration, and prep.`;
+      }
+
+      // Summary text under chart
+      document.getElementById('progressionSummaryText').innerText = `Active Hours: ${hourlyData.length} operational slots analyzed | Average: ${formatMoney(totalRev / (hourlyData.length || 1))} / hr`;
+      const peak8 = hourlyData.find(h => h.hour === 8);
+      const peak9 = hourlyData.find(h => h.hour === 9);
+      if (peak8 && peak9 && peak8.orders > 0) {
+        const surge = Math.round(((peak9.orders - peak8.orders) / peak8.orders) * 100);
+        document.getElementById('peakSurgeText').innerText = `Morning Velocity: ${surge >= 0 ? '+' + surge : surge}% orders at 9 AM vs 8 AM`;
+      }
+    }
+
+    // 3. Store Performance Comparison Calculations
+    let s5Rev = 0, s5Orders = 0, s8Rev = 0, s8Orders = 0;
+    // Calculate for comparison using rawOperationalDataset filtered by hour limits
+    const timeScoped = rawOperationalDataset.filter(d => d.hour <= state.maxHour && (state.daypart === 'all' || (state.daypart === 'morning' && d.hour <= 11) || (state.daypart === 'afternoon' && d.hour >= 12)));
+    timeScoped.forEach(d => {
+      if (d.storeId === '5') {
+        s5Rev += d.revenue;
+        s5Orders += d.orders;
+      } else if (d.storeId === '8') {
+        s8Rev += d.revenue;
+        s8Orders += d.orders;
+      }
+    });
+
+    const sumRev = s5Rev + s8Rev;
+    const s5Pct = sumRev > 0 ? (s5Rev / sumRev) * 100 : 50;
+    const s8Pct = sumRev > 0 ? (s8Rev / sumRev) * 100 : 50;
+    const s5Atv = s5Orders > 0 ? (s5Rev / s5Orders) : 0;
+    const s8Atv = s8Orders > 0 ? (s8Rev / s8Orders) : 0;
+
+    document.getElementById('store5RevDisplay').innerText = formatMoney(s5Rev);
+    document.getElementById('store8RevDisplay').innerText = formatMoney(s8Rev);
+    document.getElementById('store5ProgressBar').style.width = `${s5Pct.toFixed(1)}%`;
+    document.getElementById('store8ProgressBar').style.width = `${s8Pct.toFixed(1)}%`;
+    document.getElementById('store5OrderShare').innerText = `${s5Orders} orders (${s5Pct.toFixed(1)}% rev share)`;
+    document.getElementById('store8OrderShare').innerText = `${s8Orders} orders (${s8Pct.toFixed(1)}% rev share)`;
+    document.getElementById('store5AtvDisplay').innerText = `Avg Basket: ${formatMoney(s5Atv)}`;
+    document.getElementById('store8AtvDisplay').innerText = `Avg Basket: ${formatMoney(s8Atv)}`;
+    document.getElementById('storeRatioSummary').innerText = `${s5Pct.toFixed(1)}% vs ${s8Pct.toFixed(1)}%`;
+
+    if (s5Orders >= s8Orders) {
+      const orderDiff = s8Orders > 0 ? Math.round(((s5Orders - s8Orders) / s8Orders) * 100) : 0;
+      document.getElementById('storeLeaderTitle').innerText = 'Lower Manhattan';
+      document.getElementById('storeLeaderSub').innerText = `+${orderDiff}% higher total orders`;
+    } else {
+      const orderDiff = s5Orders > 0 ? Math.round(((s8Orders - s5Orders) / s5Orders) * 100) : 0;
+      document.getElementById('storeLeaderTitle').innerText = "Hell's Kitchen";
+      document.getElementById('storeLeaderSub').innerText = `+${orderDiff}% higher total orders`;
+    }
+
+    if (s8Atv >= s5Atv) {
+      const atvDiff = s5Atv > 0 ? (((s8Atv - s5Atv) / s5Atv) * 100).toFixed(1) : 0;
+      document.getElementById('storeAtvLeaderTitle').innerText = "Hell's Kitchen";
+      document.getElementById('storeAtvLeaderSub').innerText = `${formatMoney(s8Atv)} vs ${formatMoney(s5Atv)} (+${atvDiff}%)`;
+    } else {
+      const atvDiff = s8Atv > 0 ? (((s5Atv - s8Atv) / s8Atv) * 100).toFixed(1) : 0;
+      document.getElementById('storeAtvLeaderTitle').innerText = 'Lower Manhattan';
+      document.getElementById('storeAtvLeaderSub').innerText = `${formatMoney(s5Atv)} vs ${formatMoney(s8Atv)} (+${atvDiff}%)`;
+    }
+
+    // 4. Store × Hour Heatmap Matrix Rendering
+    renderHeatmapMatrix(timeScoped);
+  }
+
+  // Heatmap Renderer
+  function renderHeatmapMatrix(data) {
+    const tableHeader = document.getElementById('heatmapHeaderRow');
+    const tableBody = document.getElementById('heatmapBody');
+
+    // Unique sorted hours in current scope
+    const hours = Array.from(new Set(data.map(d => d.hour))).sort((a, b) => a - b);
+
+    // Build Header
+    let headerHTML = `<th class="py-2.5 px-3 font-semibold uppercase sticky left-0 bg-surface-container-lowest z-10">Location</th>`;
+    hours.forEach(h => {
+      const isPeak = h === 9;
+      headerHTML += `<th class="py-2.5 px-2.5 font-semibold text-center uppercase whitespace-nowrap">${formatHourLabel(h)}${isPeak ? ' <span class="text-secondary text-[10px]">🔥</span>' : ''}</th>`;
+    });
+    tableHeader.innerHTML = headerHTML;
+
+    // Stores to display based on store filter
+    const stores = [];
+    if (state.selectedStore === 'all' || state.selectedStore === '5') {
+      stores.push({ id: '5', name: 'Lower Manhattan', code: 'Store #5' });
+    }
+    if (state.selectedStore === 'all' || state.selectedStore === '8') {
+      stores.push({ id: '8', name: "Hell's Kitchen", code: 'Store #8' });
+    }
+
+    // Determine value range for current metric to assign color bins
+    const metricKey = state.heatmapMetric === 'rev' ? 'revenue' : (state.heatmapMetric === 'qty' ? 'items' : 'orders');
+    let maxMetricVal = 0;
+    data.forEach(d => {
+      if (d[metricKey] > maxMetricVal) maxMetricVal = d[metricKey];
+    });
+
+    tableBody.innerHTML = '';
+    stores.forEach(store => {
+      const tr = document.createElement('tr');
+      let rowHTML = `
+        <td class="py-3 px-3 font-semibold text-primary sticky left-0 bg-surface-container-lowest z-10 border-r border-outline-variant/20">
+          <div class="whitespace-nowrap">${store.name}</div>
+          <div class="text-[10px] font-label-sm text-outline">${store.code}</div>
+        </td>
+      `;
+
+      hours.forEach(h => {
+        const item = data.find(d => d.storeId === store.id && d.hour === h) || { orders: 0, revenue: 0, items: 0 };
+        const val = item[metricKey];
+        const displayVal = state.heatmapMetric === 'rev' ? formatMoney(val) : val;
+
+        // Intensity styling
+        const ratio = maxMetricVal > 0 ? (val / maxMetricVal) : 0;
+        let cellClass = 'bg-surface-container border-outline-variant/20 text-outline';
+        let labelTag = 'Low';
+
+        if (ratio >= 0.8) {
+          cellClass = 'bg-primary-container text-primary-fixed ring-1 ring-secondary/50 shadow-xs font-bold';
+          labelTag = 'Peak 🔥';
+        } else if (ratio >= 0.5) {
+          cellClass = 'bg-secondary text-on-secondary ring-1 ring-primary-container/30 font-semibold';
+          labelTag = 'High';
+        } else if (ratio >= 0.25) {
+          cellClass = 'bg-secondary-fixed/50 border-secondary/30 text-secondary font-medium';
+          labelTag = 'Med';
+        }
+
+        rowHTML += `
+          <td class="py-2.5 px-1.5 text-center min-w-[70px]">
+            <div class="inline-flex flex-col items-center justify-center w-full py-2 px-1 rounded-lg ${cellClass} transition-all duration-150">
+              <span class="font-label-md text-xs leading-none">${displayVal}</span>
+              <span class="text-[9px] font-label-sm opacity-90 mt-1">${labelTag}</span>
+            </div>
+          </td>
+        `;
+      });
+
+      tr.innerHTML = rowHTML;
+      tableBody.appendChild(tr);
+    });
+  }
+
+  // Attach Event Listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Store Filter Dropdown
+    const storeSelector = document.getElementById('storeSelector');
+    if (storeSelector) {
+      storeSelector.addEventListener('change', (e) => {
+        state.selectedStore = e.target.value;
+        syncTopNavStore(state.selectedStore);
+        renderDashboard();
+      });
+    }
+
+    // Top Navigation Store Buttons
+    const topStores = document.querySelectorAll('.top-nav-store');
+    topStores.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const store = btn.getAttribute('data-store');
+        state.selectedStore = store;
+        storeSelector.value = store;
+        syncTopNavStore(store);
+        renderDashboard();
+      });
+    });
+
+    function syncTopNavStore(store) {
+      topStores.forEach(b => {
+        if (b.getAttribute('data-store') === store) {
+          b.className = 'font-label-md text-label-md text-primary border-b-2 border-primary pb-1 font-semibold cursor-pointer top-nav-store';
+        } else {
+          b.className = 'font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-1 cursor-pointer top-nav-store';
+        }
+      });
+    }
+
+    // 2. Primary Metric Toggle (Sidebar)
+    const btnRev = document.getElementById('btnMetricRev');
+    const btnQty = document.getElementById('btnMetricQty');
+    if (btnRev && btnQty) {
+      btnRev.addEventListener('click', () => {
+        state.primaryMetric = 'revenue';
+        btnRev.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'border', 'border-outline-variant/20');
+        btnRev.classList.remove('text-on-surface-variant');
+        btnQty.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'border', 'border-outline-variant/20');
+        btnQty.classList.add('text-on-surface-variant');
+        renderDashboard();
+      });
+
+      btnQty.addEventListener('click', () => {
+        state.primaryMetric = 'orders';
+        btnQty.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'border', 'border-outline-variant/20');
+        btnQty.classList.remove('text-on-surface-variant');
+        btnRev.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'border', 'border-outline-variant/20');
+        btnRev.classList.add('text-on-surface-variant');
+        renderDashboard();
+      });
+    }
+
+    // 3. Daypart Buttons
+    const daypartBtns = document.querySelectorAll('.daypart-btn');
+    daypartBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        daypartBtns.forEach(b => {
+          b.classList.remove('bg-surface-container-lowest', 'font-semibold', 'text-primary', 'shadow-xs');
+          b.classList.add('text-on-surface-variant');
+        });
+        btn.classList.add('bg-surface-container-lowest', 'font-semibold', 'text-primary', 'shadow-xs');
+        btn.classList.remove('text-on-surface-variant');
+        state.daypart = btn.getAttribute('data-daypart');
+        renderDashboard();
+      });
+    });
+
+    // 4. Operating Hour Range Slider
+    const hourInput = document.getElementById('hourRangeInput');
+    const hourDisplay = document.getElementById('hourRangeDisplay');
+    if (hourInput && hourDisplay) {
+      hourInput.addEventListener('input', (e) => {
+        const val = parseInt(e.target.value);
+        state.maxHour = val;
+        hourDisplay.innerText = `7:00 AM – ${formatHourLabel(val)}`;
+        renderDashboard();
+      });
+    }
+
+    // 5. Heatmap Multi-Metric Toggle Buttons
+    const heatmapMetricBtns = document.querySelectorAll('.heatmap-metric-btn');
+    heatmapMetricBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        heatmapMetricBtns.forEach(b => {
+          b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-semibold');
+          b.classList.add('text-outline', 'font-medium');
+        });
+        btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-semibold');
+        btn.classList.remove('text-outline', 'font-medium');
+        state.heatmapMetric = btn.getAttribute('data-hmetric');
+        renderDashboard();
+      });
+    });
+
+    // 6. Day of Week Selector
+    const dayOfWeekSelector = document.getElementById('dayOfWeekSelector');
+    if (dayOfWeekSelector) {
+      dayOfWeekSelector.addEventListener('change', (e) => {
+        state.dayOfWeek = e.target.value;
+        const note = document.getElementById('dynamicTelemetryLabel');
+        if (e.target.value !== 'all') {
+          note.innerText = `Filtered: ${e.target.selectedOptions[0].text} (2025)`;
+        } else {
+          note.innerText = 'Live Telemetry Active';
+        }
+        renderDashboard();
+      });
+    }
+
+    // 7. Reset Filters Button
+    const btnReset = document.getElementById('btnResetFilters');
+    if (btnReset) {
+      btnReset.addEventListener('click', () => {
+        state.selectedStore = 'all';
+        state.primaryMetric = 'revenue';
+        state.heatmapMetric = 'txns';
+        state.maxHour = 20;
+        state.daypart = 'all';
+        state.dayOfWeek = 'all';
+
+        if (storeSelector) storeSelector.value = 'all';
+        if (hourInput) {
+          hourInput.value = 20;
+          hourDisplay.innerText = '7:00 AM – 8:00 PM';
+        }
+        if (dayOfWeekSelector) dayOfWeekSelector.value = 'all';
+
+        syncTopNavStore('all');
+
+        // Reset daypart styles
+        daypartBtns.forEach(b => {
+          if (b.getAttribute('data-daypart') === 'all') {
+            b.classList.add('bg-surface-container-lowest', 'font-semibold', 'text-primary', 'shadow-xs');
+            b.classList.remove('text-on-surface-variant');
+          } else {
+            b.classList.remove('bg-surface-container-lowest', 'font-semibold', 'text-primary', 'shadow-xs');
+            b.classList.add('text-on-surface-variant');
+          }
+        });
+
+        // Reset metric styles
+        btnRev.click();
+
+        // Reset heatmap buttons
+        heatmapMetricBtns.forEach(b => {
+          if (b.getAttribute('data-hmetric') === 'txns') {
+            b.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-semibold');
+            b.classList.remove('text-outline', 'font-medium');
+          } else {
+            b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-semibold');
+            b.classList.add('text-outline', 'font-medium');
+          }
+        });
+
+        renderDashboard();
+      });
+    }
+
+    // Initial render
+    renderDashboard();
+  });
+</script>
+</body></html>
