@@ -281,5 +281,44 @@ def build_runtime_html(data_path: str, stitch_path: str) -> str:
 html = build_runtime_html(str(DATA_PATH), str(STITCH_PATH))
 
 # Streamlit is only the host; the visible dashboard is the Stitch UI itself.
-st.markdown("<style>body{margin:0} .block-container{padding:0!important;max-width:none!important} [data-testid='stAppViewContainer']{background:#fbf9f5} iframe{border:0!important}</style>", unsafe_allow_html=True)
-components.html(html, height=5000, scrolling=True)
+# Streamlit is only the host; the visible dashboard is the Stitch UI itself.
+
+st.markdown(
+    """
+    <style>
+        body {
+            margin: 0 !important;
+        }
+
+        .block-container {
+            padding: 0 !important;
+            max-width: none !important;
+        }
+
+        [data-testid="stAppViewContainer"] {
+            background: #fbf9f5;
+        }
+
+        /* Hide Streamlit top header / black bar */
+        [data-testid="stHeader"] {
+            display: none !important;
+        }
+
+        /* Hide Streamlit toolbar */
+        [data-testid="stToolbar"] {
+            display: none !important;
+        }
+
+        iframe {
+            border: 0 !important;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+components.html(
+    html,
+    height=5000,
+    scrolling=True
+)
